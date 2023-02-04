@@ -3,8 +3,7 @@ name: cd
 on:
   workflow_run:
     workflows: [ci]
-    types:
-      - completed
+    types: [success]
 
 jobs:
   cd:
