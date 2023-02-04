@@ -23,4 +23,5 @@ jobs:
             cd ~/github_runner_test
             git pull origin main
             npm i install
+            npm test
             docker compose up --build -d
