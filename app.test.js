@@ -6,7 +6,7 @@ describe("GET /", function () {
     it("responds with json", async function () {
       const response = await request(app).get("/");
       expect(response.status).toEqual(200);
-      expect(response.body.message).toMatch(/udin/i);
+      expect(response.body.message).toMatch(/hello world/i);
     });
   } catch (err) {
     console.log(err);
