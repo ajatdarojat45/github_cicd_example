@@ -4,7 +4,7 @@
   "description": "## test 1",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
