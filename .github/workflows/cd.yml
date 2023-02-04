@@ -11,6 +11,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Running test Using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: |
+            cd ~/github_runner_test
+            git pull origin main
+            npm i install
+            npm test
 
       - name: Deploy Using ssh
         uses: appleboy/ssh-action@master
@@ -23,5 +36,4 @@ jobs:
             cd ~/github_runner_test
             git pull origin main
             npm i install
-            npm test
             docker compose up --build -d
