@@ -3,8 +3,7 @@ name: cd
 on:
   workflow_run:
     workflows: [ci]
-    types:
-      - completed
+    types: [completed]
 
 jobs:
   cd:
@@ -12,8 +11,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: testing Using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: |
+            cd ~/github_runner_test
+            git pull origin main
+            npm i install
+            npm test
 
       - name: Deploy Using ssh
+        if: ${{ success() }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
