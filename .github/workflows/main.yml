@@ -21,7 +21,6 @@ jobs:
           port: 22
           script: |
             cd ~/github_runner_test
-            git pull origin master
-            git status
+            git pull origin main
             npm i install
             docker compose up --build -d
